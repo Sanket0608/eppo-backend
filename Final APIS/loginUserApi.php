@@ -7,13 +7,13 @@ $res = mysqli_query($con, "SELECT * from user where user_name='$name'");
 $check = mysqli_num_rows($res);
 $row=mysqli_fetch_assoc($res);
 // print_r($row['user_name']);
-echo $check;
+// echo $check;
 if ($check > 0) {
     // echo "if entered";
-    $verify = password_verify($password, $row['password']);
-    echo $verify;
+    // $verify=password_verify($password,$row['password']);
+    // echo $verify."v \n";
     // echo "Here I am";
-    if ($verify != 1) {
+    if (password_verify($password,$row['password'])) {
         echo "Invalid Password";
     } else {
         echo "Password Matched";
