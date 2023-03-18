@@ -1,10 +1,11 @@
 <?php
 try {
     $data = json_decode(file_get_contents('php://input'), true);
-    $phone = $data['phone'];
-    SendOTP($phone);
+    SendOTP($data['phone']);
 } catch (\Throwable $th) {
-    return 'failed';
+    // return 'failed';
+    $status = array("Status"=>"failed");
+    echo json_encode($status);
 
 }
 function SendOTP($phone)
@@ -48,11 +49,15 @@ function SendOTP($phone)
     curl_close($curl);
 
     if ($err) {
-        echo "cURL Error #:" . $err;
+        // echo "cURL Error #:" . $err;
+        $status = array("Status"=>$err);
+        return json_encode($status);
     } else {
         echo $response;
         // mysqli_query($con, "INSERT INTO user(user_name,email,mobile_no,city,address,password) VALUES ('$name','$email',$phone,'$city','$address','$password')");
         mysqli_query($con, "INSERT into otp(mobile_no,otp) values('$phone','$otp')");
+        $status = array("Status"=>"OTP sended sucessgully");
+        return json_encode($status);
         // verifyOTP($phone,$otp, $name, $password, $address, $email, $city);
     }
 

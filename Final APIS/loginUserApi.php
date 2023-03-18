@@ -12,12 +12,18 @@ if ($check > 0) {
     // $verify = password_verify($password, $row['password']);
     // echo $verify;
     if (md5($data['password'])==$row['password']) {
-        echo 'Correct Password!';
+        // echo 'Correct Password!';
+        $status = array("Status"=>"Correct Password");
+        echo json_encode($status);
     } else {
-        echo 'Password is Incorrect';
+        // echo 'Password is Incorrect';
+        $status = array("Status"=>"Invalid Password");
+        echo json_encode($status);
     }
 } else {
-    echo "Invalid Username or Passsword";
+    // echo "Invalid Username or Passsword";
+    $status = array("Status"=>"Invalid Username or Password");
+        echo json_encode($status);
 }
 // $con->close();
 ?>

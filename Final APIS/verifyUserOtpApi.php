@@ -3,15 +3,7 @@ include('db.php');
 // Processing jason data
 try {
     $data = json_decode(file_get_contents('php://input'), true);
-    $name = $data['name'];
-    $password = $data['password'];
-    $address = $data['address'];
-    $email = $data['email'];
-    $city = $data['city'];
-    $phone = $data['phone'];
-    $otp = $data['otp'];
-
-    verifyOTP($phone, $otp, $name, $password, $address, $email, $city);
+    verifyOTP($data['phone'], $data['otp'], $data['name'], $data['password'], $data['address'], $data['email'], $data['city']);
     
 } catch (\Throwable $th) {
     return 'failed';
@@ -25,9 +17,12 @@ function verifyOTP($phone, $otp, $name, $password, $address, $email, $city)
     if ($otp == $rows['otp']) {
         $pass=md5($password);
         mysqli_query($con, "INSERT INTO user(user_name,email,mobile_no,city,address,password) VALUES ('$name','$email',$phone,'$city','$address','$pass')");
-        return "success";
+        // return "success";
+        $status = array("Status"=>"success");
+        echo json_encode($status);
     } else {
-        return "otp not matched";
+        $status = array("Status"=>"OTP not matched");
+        echo json_encode($status);
     }
 
 }

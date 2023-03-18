@@ -1,6 +1,6 @@
-<!-- get different types/unique of professions from database -->
 <?php
-    include('db.php');
+// get different types/unique of professions from database 
+include('db.php');
     $sqlRes=mysqli_query($con,"SELECT distinct(profession) from professional");
     if(mysqli_num_rows($sqlRes)>0){
         $data=[];
