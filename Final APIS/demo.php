@@ -1,4 +1,4 @@
 <?php 
-require_once('verifyOtpApi.php');
-verifyOTP(8422060813, 3013, 'Sanket Ugale', 'password', 'DADAR', 'sanketugale2003@gmail.com', 'Mumbai');
+require_once('verifyUserOtpApi.php');
+verifyOTP(9623893210, 1111, 'Pruthu', 'password', 'Pawai', 'pruthu@gmai.com', 'Mumbai');
 ?>
