@@ -9,8 +9,9 @@ $row = mysqli_fetch_assoc($res);
 // print_r($row['user_name']);
 // echo $check;
 if ($check > 0) {
-    $verify = password_verify($password, $row['password']);
-    if ($verify) {
+    // $verify = password_verify($password, $row['password']);
+    // echo $verify;
+    if (md5($data['password'])==$row['password']) {
         echo 'Correct Password!';
     } else {
         echo 'Password is Incorrect';
