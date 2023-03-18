@@ -5,20 +5,16 @@ $name = $data['name'];
 $password = $data['password'];
 $res = mysqli_query($con, "SELECT * from user where user_name='$name'");
 $check = mysqli_num_rows($res);
-$row=mysqli_fetch_assoc($res);
+$row = mysqli_fetch_assoc($res);
 // print_r($row['user_name']);
 // echo $check;
 if ($check > 0) {
-    // echo "if entered";
-    // $verify=password_verify($password,$row['password']);
-    // echo $verify."v \n";
-    // echo "Here I am";
-    if (password_verify($password,$row['password'])) {
-        echo "Invalid Password";
+    $verify = password_verify($password, $row['password']);
+    if ($verify) {
+        echo 'Correct Password!';
     } else {
-        echo "Password Matched";
+        echo 'Password is Incorrect';
     }
-
 } else {
     echo "Invalid Username or Passsword";
 }
