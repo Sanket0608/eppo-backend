@@ -1,3 +1,4 @@
+<!-- Get list of professionals belongs to same profession  -->
 <?php
 include('db.php');
 $data = json_decode(file_get_contents('php://input'), true);
